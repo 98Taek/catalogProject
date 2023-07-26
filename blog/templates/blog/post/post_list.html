@@ -3,13 +3,13 @@
 {% block title %}post_list.html{% endblock title %}
 
 {% block content %}
-    <h1>List</h1>
+    <h1 class="d-flex justify-content-left">List</h1>
     <ul>
         {% for post in posts %}
-            <div class="card mt-3 ms-3" style="width: 18rem;">
+            <div class="card mt-3" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a>
+                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">
                         {{ post.author }}
@@ -19,5 +19,5 @@
             </div>
         {% endfor %}
     </ul>
-
+    {% include "pagination.html" with page=posts %}
 {% endblock content %}
