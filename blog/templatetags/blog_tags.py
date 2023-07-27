@@ -10,3 +10,9 @@ register = template.Library()
 def get_most_commented_post(count=5):
     return Post.objects.filter(status=Post.Status.PUBLISHED).annotate(total_comments=Count('comments')).order_by(
         '-total_comments')[:count]
+
+
+@register.inclusion_tag('blog/post/includes/latest_posts.html')
+def show_latest_posts(count=5):
+    latest_posts = Post.objects.filter(status=Post.Status.PUBLISHED).order_by('-publish')[:count]
+    return {'latest_posts': latest_posts}
