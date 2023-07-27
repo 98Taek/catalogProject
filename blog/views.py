@@ -2,15 +2,20 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
+from taggit.models import Tag
 
 from blog.forms import EmailPostForm, CommentForm
 from blog.models import Post
 
 
-def post_list(request):
+def post_list(request, tag_slug=None):
     post_list = Post.objects.filter(status=Post.Status.PUBLISHED).all()
     per_page = request.GET.get('per_page', 3)
     page_number = request.GET.get('page', 1)
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        post_list = post_list.filter(tags__in=[tag])
     paginator = Paginator(post_list, per_page, orphans=1)
     try:
         posts = paginator.page(page_number)
