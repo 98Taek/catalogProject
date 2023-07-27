@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
 from blog.forms import EmailPostForm, CommentForm
-from blog.models import Post, Comment
+from blog.models import Post
 
 
 def post_list(request):
@@ -25,7 +25,8 @@ def post_list(request):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
     form = CommentForm()
-    return render(request, 'blog/post/post_detail.html', {'post': post, 'form': form})
+    comments = post.comments.filter(active=True)
+    return render(request, 'blog/post/post_detail.html', {'post': post, 'form': form, 'comments': comments})
 
 
 def post_share(request, post_id):
@@ -55,4 +56,5 @@ def post_comment(request, post_id):
         comment.post = post
         comment.save()
         return redirect(post)
-    return render(request, 'blog/post/post_detail.html', {'post': post, 'form': form})
+    comments = post.comments.filter(active=True)
+    return render(request, 'blog/post/post_detail.html', {'post': post, 'form': form, 'comments': comments})
