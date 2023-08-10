@@ -1,4 +1,4 @@
-<h2>Add comments</h2>
+<h5>Add comments</h5>
 <form action="{% url 'blog:post_comment' post.id %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
