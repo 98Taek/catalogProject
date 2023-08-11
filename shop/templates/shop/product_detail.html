@@ -3,3 +3,4 @@
     <img src="{{ product.image.url }}" alt="" width="120">
 {% endif %}
 {{ product.price }}
+<a href="{% url 'shop:add_cart' product.id %}">Add to Cart</a>
