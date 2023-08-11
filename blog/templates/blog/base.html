@@ -26,7 +26,8 @@
         </div>
         <div class="col-3 text-bg-light">
             <h3>Sidebar</h3>
-            <a href="{% url 'shop:cart_detail' %}" class="btn btn-primary">장바구니</a>
+            <a href="{% url 'shop:cart_detail' %}" class="btn btn-primary">장바구니 <span
+                    id="cart_count">{{ cart.items|length }}</span></a>
             <hr>
             <h4>Most Commented Post</h4>
             <ul class="list-group">
@@ -51,7 +52,7 @@
     document.addEventListener('DOMContentLoaded', (event) => {
         {% block domready %}
         {% endblock domready %}
-    });
+    })
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 from _decimal import Decimal
 
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
 from shop.forms import OrderCreateForm
@@ -7,7 +8,8 @@ from shop.models import Product, OrderItem
 from shop.tasks import order_created
 
 
-def add_cart(request, product_id):
+def add_cart(request):
+    product_id = request.POST.get('id')
     product = get_object_or_404(Product, id=product_id)
     cart = request.session.get('cart', {})
     cart[str(product_id)] = {
@@ -16,7 +18,7 @@ def add_cart(request, product_id):
     }
     request.session['cart'] = cart
     request.session.modified = True
-    return redirect('shop:cart_detail')
+    return JsonResponse({'cart_length': len(cart.items())})
 
 
 def cart_detail(request):
