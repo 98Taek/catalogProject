@@ -154,3 +154,5 @@ CACHES = {
         }
     }
 }
+
+CELERY_TASK_ALWAYS_EAGER = DEBUG
