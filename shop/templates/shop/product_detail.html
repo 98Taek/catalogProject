@@ -3,5 +3,4 @@
 {% if product.image %}
     <img src="{{ product.image.url }}" alt="" width="120">
 {% endif %}
-{{ product.price|intcomma }}
-<a href="{% url 'shop:add_cart' product.id %}">Add to Cart</a>
+<span>{{ product.price|intcomma }}</span>
