@@ -27,7 +27,8 @@ def cart_detail(request):
         item['price'] = Decimal(item['price'])
         item['total_price'] = item['price'] * item['quantity']
         cart[key] = item
-    return render(request, 'cart/detail.html', {'cart_dict': cart})
+    total_price = sum(Decimal(item['price']) * item['quantity'] for item in cart.values())
+    return render(request, 'cart/detail.html', {'cart_dict': cart, 'total_price': total_price})
 
 
 def cart_remove(request, product_id):
@@ -44,3 +45,7 @@ def cart_update(request, product_id):
     request.session['cart'] = cart
     request.session.modified = True
     return redirect('shop:cart_detail')
+
+
+def order_create(request):
+    return render(request, 'shop/order_created.html', {})
