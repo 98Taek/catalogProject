@@ -8,7 +8,7 @@
                 <div class="container">
                     {% include 'shop/product_detail.html' with product=item.product %}
                 </div>
-                <div class="container col-sm-3 d-flex flex-colmn">
+                <div class="container col-sm-3 d-flex flex-column">
                     <form action="{% url 'shop:update_cart' product_id %}" method="post" class="d-flex flex-row">
                         <input class="form-control" type="text" name="quantity" value="{{ item.quantity }}"
                                placeholder="수량">
