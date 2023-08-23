@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "title_register" %}
+{% endblock title %}
+
+{% block content %}
+    <h2>{% trans "title_register" %}</h2>
+    <form action="" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="{% trans "btn_register" %}">
+    </form>
+{% endblock content %}
