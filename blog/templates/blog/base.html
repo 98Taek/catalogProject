@@ -1,4 +1,5 @@
 {% load blog_tags %}
+{% load i18n %}
 {% load static %}
 
 <!doctype html>
@@ -15,7 +16,7 @@
 <body>
 <nav class="navbar bg-body-emphasis">
     <div class="container-fluid">
-        <a class="navbar-brand h1" href="{% url 'blog:post_list' %}">쇼핑몰 고도화 프로젝트</a>
+        <a class="navbar-brand h1" href="{% url 'blog:post_list' %}">{% trans "쇼핑몰 고도화 프로젝트" %}</a>
     </div>
 </nav>
 <div class="container gy-5">
@@ -26,7 +27,7 @@
         </div>
         <div class="col-3 text-bg-light">
             <h3>Sidebar</h3>
-            <a href="{% url 'shop:cart_detail' %}" class="btn btn-primary">장바구니 <span
+            <a href="{% url 'shop:cart_detail' %}" class="btn btn-primary">{% trans "장바구니" %} <span
                     id="cart_count">{{ cart.items|length }}</span></a>
             <hr>
             <h4>Most Commented Post</h4>

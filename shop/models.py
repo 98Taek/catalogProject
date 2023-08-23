@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from blog.models import Post
 
@@ -24,10 +25,10 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    address = models.CharField(max_length=250)
-    zipcode = models.CharField(max_length=20)
+    name = models.CharField(_('name'), max_length=50)
+    email = models.EmailField(_('email'))
+    address = models.CharField(_('address'), max_length=250)
+    zipcode = models.CharField(_('zipcode'), max_length=20)
     paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -1,20 +1,21 @@
 {% extends "blog/base.html" %}
+{% load i18n %}
 {% load humanize %}
 
-{% block title %}주문하기{% endblock title %}
+{% block title %}{% trans "장바구니" %}{% endblock title %}
 
 {% block content %}
-    <h1>주문하기</h1>
+    <h1>{% trans "주문하기" %}</h1>
     <div class="container-fluid d-flex flex-row justify-content-between">
         <form action="{% url 'shop:order_create' %}" method="post" class="col-sm-6">
             {{ form.as_p }}
             {% csrf_token %}
-            <input type="submit" value="결제하기" class="btn btn-primary form-control">
+            <input type="submit" value="{% trans "결제하기" %}" class="btn btn-primary form-control">
         </form>
         <div class="col-sm-3">
             <ul class="list-group rounded-0 d-flex flex-column col-sm-12">
                 <li class="list-group-item">
-                    <h4>주문정보</h4>
+                    <h4>{% trans "주문정보" %}</h4>
                 </li>
                 {% for product_id, item in cart_dict.items %}
                     <li class="list-group-item col-sm-12 d-flex flex-row align-items-center justify-content-between">
