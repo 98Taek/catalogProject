@@ -1,6 +1,12 @@
 {% load humanize %}
+{% load i18n %}
 <h1>{{ product }}</h1>
 {% if product.image %}
     <img src="{{ product.image.url }}" alt="" width="120">
 {% endif %}
-<span>{{ product.price|intcomma }}원</span>
+{% get_current_language as language %}
+{% if language == 'ko' %}
+    <span>{{ product.price|intcomma|floatformat:0 }}원</span>
+{% elif  language == 'en' %}
+    <span>${{ product.price|intcomma|floatformat:2 }}</span>
+{% endif %}

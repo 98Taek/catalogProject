@@ -26,7 +26,12 @@
     <hr>
     <div class="container d-flex flex-column align-items-end">
         <span class="h3">
-            {% trans "Total" %}: {{ total_price|intcomma }}원
+        {% get_current_language as language %}
+            {% if language == 'ko' %}
+                합계: {{ total_price|intcomma|floatformat:0 }}원
+            {% elif language == 'en' %}
+                Total: ${{ total_price|intcomma|floatformat:2 }}
+            {% endif %}
         </span>
         <a href="{% url 'shop:order_create' %}" class="btn btn-primary">{% trans "주문하기" %}</a>
     </div>
