@@ -27,6 +27,17 @@
         </div>
         <div class="col-3 text-bg-light">
             <h3>Sidebar</h3>
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            <ul class="list-group">
+                {% for language in languages %}
+                    <li class="list-group-item">
+                        <a href="/{{ language.code }}/">{{ language.name_local }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <hr>
             <a href="{% url 'shop:cart_detail' %}" class="btn btn-primary">{% trans "장바구니" %} <span
                     id="cart_count">{{ cart.items|length }}</span></a>
             <hr>

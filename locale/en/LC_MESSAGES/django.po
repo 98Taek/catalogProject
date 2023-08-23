@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-23 09:51+0900\n"
-"PO-Revision-Date: 2023-08-23 00:53+0000\n"
+"PO-Revision-Date: 2023-08-23 01:35+0000\n"
 "Last-Translator:   <imjt9345@naver.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -29,11 +29,11 @@ msgstr "cart"
 
 #: mysite2/settings.py:120
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: mysite2/settings.py:121
 msgid "Korean"
-msgstr ""
+msgstr "Korean"
 
 #: venv/lib/python3.9/site-packages/click/_termui_impl.py:518
 #, python-brace-format
