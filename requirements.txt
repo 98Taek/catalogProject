@@ -6,3 +6,4 @@ Pillow==10.0.0
 psycopg2-binary==2.9.6
 redis==4.6.0
 django-rosetta==0.9.9
+django-parler==2.3.0

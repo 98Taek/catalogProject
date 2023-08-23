@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'taggit',
     'rosetta',
+    'parler',
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,15 @@ CELERY_TASK_ALWAYS_EAGER = True
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
+
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'en'},
+        {'code': 'ko'},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+    }
+}
+
