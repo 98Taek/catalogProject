@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'no_login.html' %}
 
 {% load i18n %}
 
@@ -13,4 +13,7 @@
         {% csrf_token %}
         <input type="submit" value="{% trans "btn_register" %}">
     </form>
+    <p>
+        {% trans "If you have account" %}<a href="{% url 'login' %}">{% trans "login here." %}</a>
+    </p>
 {% endblock content %}
