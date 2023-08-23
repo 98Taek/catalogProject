@@ -18,16 +18,14 @@ class Product(TranslatableModel):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-created']
+        indexes = [
+            models.Index(fields=['-created']),
+        ]
 
-class Meta:
-    ordering = ['-created']
-    indexes = [
-        models.Index(fields=['-created']),
-    ]
-
-
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
 
 
 class Order(TranslatableModel):
@@ -39,13 +37,11 @@ class Order(TranslatableModel):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'주문 {self.id}'
 
-def __str__(self):
-    return f'주문 {self.id}'
-
-
-def get_total_cost(self):
-    return sum(item.get_cost() for item in self.items.all())
+    def get_total_cost(self):
+        return sum(item.get_cost() for item in self.items.all())
 
 
 class OrderItem(models.Model):
