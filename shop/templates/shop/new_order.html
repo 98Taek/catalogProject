@@ -24,7 +24,7 @@
                     </li>
                 {% endfor %}
                 <li class="list-group-item h3">
-                    Total: {{ total_price|intcomma }}
+                    {% trans "Total:" %} {{ total_price|intcomma }}
                 </li>
             </ul>
             <div class="container d-flex flex-column align-items-end">

@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load i18n %}
 
 {% block title %}post_detail.html{% endblock title %}
 
@@ -16,12 +17,12 @@
         </div>
     </div>
     <div class="py-4">
-        <h5>Products</h5>
+        <h5>{% trans "Products" %}</h5>
         <ul class="list-group list-group-horizontal">
             {% for product in post.products.all %}
                 <li class="list-group-item d-flex flex-column col-sm-4 justify-content-baseline align-items-center">
                     {% include 'shop/product_detail.html' with product=product %}
-                    <a class="addCart" href="#" data-id="{{ product.id }}">Add to Cart</a>
+                    <a class="addCart" href="#" data-id="{{ product.id }}">{% trans "Add to Cart" %}</a>
                 </li>
             {% endfor %}
         </ul>
