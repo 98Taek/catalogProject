@@ -10,8 +10,8 @@ class Product(TranslatableModel):
         name=models.CharField(max_length=200),
         currency=models.CharField(max_length=3),
         price=models.DecimalField(default=0, max_digits=12, decimal_places=2),
+        description=models.TextField(blank=True),
     )
-    description = models.TextField(blank=True)
     posts = models.ManyToManyField(Post, related_name='products')
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     available = models.BooleanField(default=True)
@@ -28,7 +28,7 @@ class Product(TranslatableModel):
         return self.name
 
 
-class Order(TranslatableModel):
+class Order(models.Model):
     name = models.CharField(_('name'), max_length=50)
     email = models.EmailField(_('email'))
     address = models.CharField(_('address'), max_length=250)

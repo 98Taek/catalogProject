@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-23 11:22+0900\n"
+"POT-Creation-Date: 2023-08-23 13:05+0900\n"
 "PO-Revision-Date: 2023-08-23 02:10+0000\n"
 "Last-Translator:   <imjt9345@naver.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,11 +35,11 @@ msgstr "상품"
 msgid "Add to Cart"
 msgstr "장바구니에 추가하기"
 
-#: mysite2/settings.py:120
+#: mysite2/settings.py:121
 msgid "English"
 msgstr "영어"
 
-#: mysite2/settings.py:121
+#: mysite2/settings.py:122
 msgid "Korean"
 msgstr "한국어"
 
