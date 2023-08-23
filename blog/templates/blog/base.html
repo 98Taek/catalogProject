@@ -36,6 +36,13 @@
                         <a href="/{{ language.code }}/">{{ language.name_local }}</a>
                     </li>
                 {% endfor %}
+                <li class="list-group-item">
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">{% trans "Login" %}</a>
+                    {% endif %}
+                </li>
             </ul>
             <hr>
             <a href="{% url 'shop:cart_detail' %}" class="btn btn-primary">{% trans "장바구니" %} <span

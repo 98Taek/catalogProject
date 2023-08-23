@@ -1,0 +1,10 @@
+{% load i18n %}
+
+{% block title %}
+    {% trans "Logout" %}
+{% endblock title %}
+
+{% block content %}
+    <h1>{% trans "Logout" %}</h1>
+    <a href="{% url 'blog:post_list' %}"><input type="submit" value="{% trans "logout" %}"></a>
+{% endblock content %}

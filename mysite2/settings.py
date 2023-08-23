@@ -182,3 +182,5 @@ PARLER_LANGUAGES = {
     }
 }
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'blog:post_list'
