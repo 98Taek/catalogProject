@@ -23,6 +23,7 @@ from django.urls import path, include
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
+    path('account/', include('account.urls')),
 
     path('shop/', include('shop.urls')),
     path('', include('blog.urls', namespace='blog')),
