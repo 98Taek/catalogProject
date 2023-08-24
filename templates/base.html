@@ -19,6 +19,7 @@
             <div class="me-3">
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'logout' %}">{% trans "link_logout" %}</a>
+                    <a href="{% url 'password_change' %}">{% trans "link_password_change" %}</a>
                 {% else %}
                     <a href="{% url 'login' %}">{% trans "link_login" %}</a>
                     <a href="{% url 'register' %}">{% trans "link_register" %}</a>
