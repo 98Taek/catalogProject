@@ -81,3 +81,11 @@ def order_create(request):
         form = OrderCreateForm()
 
     return render(request, 'shop/new_order.html', {'form': form, 'cart_dict': cart, 'total_price': total_price})
+
+
+def payment_success(request):
+    return render(request, 'shop/success.html')
+
+
+def payment_fail(request):
+    return render(request, 'shop/fail.html')
