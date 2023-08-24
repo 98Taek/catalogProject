@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-!$)uyahn1a*$)f&axxs0og%f^pg8(^v6ab8^086uqhw@+^7m#@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'mysite.com', '127.0.0.1', 'localhost',
+]
 
 
 # Application definition
@@ -45,6 +47,8 @@ INSTALLED_APPS = [
     'taggit',
     'rosetta',
     'parler',
+    'django_extensions',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -183,3 +187,11 @@ PARLER_LANGUAGES = {
 }
 
 LOGIN_REDIRECT_URL = 'blog:post_list'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.naver.NaverOAuth2',
+]
+
+SOCIAL_AUTH_NAVER_KEY = 'JiARA_lKm_5xm9Sd9l4x'
+SOCIAL_AUTH_NAVER_SECRET = 'TXMPVDfEVC'
