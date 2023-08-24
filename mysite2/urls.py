@@ -28,3 +28,7 @@ urlpatterns = i18n_patterns(
     path('shop/', include('shop.urls')),
     path('', include('blog.urls', namespace='blog')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
+    path('social-auth/', include('social_django.urls', namespace='social')),
+]

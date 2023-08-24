@@ -30,10 +30,13 @@ ALLOWED_HOSTS = [
     'mysite.com', '127.0.0.1', 'localhost',
 ]
 
+SITE_ID = 1
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
+    'social_django',
     'account.apps.AccountConfig',
     'shop.apps.ShopConfig',
     'blog.apps.BlogConfig',
@@ -44,11 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.sites',
     'taggit',
     'rosetta',
     'parler',
-    'django_extensions',
-    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -189,9 +191,13 @@ PARLER_LANGUAGES = {
 LOGIN_REDIRECT_URL = 'blog:post_list'
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.naver.NaverOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
-SOCIAL_AUTH_NAVER_KEY = 'JiARA_lKm_5xm9Sd9l4x'
-SOCIAL_AUTH_NAVER_SECRET = 'TXMPVDfEVC'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_NAVER_KEY = 'ZpQQ3xbmYM5kjlZb8VM3'
+SOCIAL_AUTH_NAVER_SECRET = 'xh1336l0nb'
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
