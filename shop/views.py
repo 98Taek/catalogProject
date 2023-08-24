@@ -76,7 +76,7 @@ def order_create(request):
             request.session['cart'] = {}
             request.session.modified = True
             order_created.delay(order.id)
-            return render(request, 'shop/order_created.html', {'order': order})
+            return render(request, 'shop/payment.html', {'order': order})
     else:
         form = OrderCreateForm()
 
