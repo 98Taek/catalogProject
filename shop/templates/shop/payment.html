@@ -5,26 +5,28 @@
 
 {% block content %}
     <h1>{% trans "order_complete" %}</h1>
-    <div class="payment-method">
-        <button id="payment-request-button">
-            결제하기
-        </button>
-    </div>
+    <div id="payment-method"></div>
+    <button id="payment-request-button">결제하기</button>
 {% endblock content %}
 
 {% block javascript %}
     <script src="https://js.tosspayments.com/v1/payment-widget"></script>
     <script>
-        const paymentWidget = PaymentWidget("test_ck_nRQoOaPz8L9bNy6zvpW3y47BMw6v", PaymentWidget.ANONYMOUS);
-        paymentWidget.renderPaymentMethods("payment-method", {value: {{ order.get_total_cost }}});
+        const paymentWidget = PaymentWidget(
+            "test_ck_nRQoOaPz8L9bNy6zvpW3y47BMw6v",
+            PaymentWidget.ANONYMOUS
+        );
+        paymentWidget.renderPaymentMethods("#payment-method", {value: {{ order.get_total_cost }}});
+
         const paymentRequestButton = document.getElementById('payment-request-button');
         paymentRequestButton.addEventListener('click', () => {
-           paymentWidget.requestPayment({
-              orderId: "order-{{ order.id }}",
-              orderName: "{{ order }}",
-              successUrl: window.location.origin + "/ko/shop/success",
-              failUrl: window.location.origin + "/ko/shop/fail"
-           });
+            paymentWidget.requestPayment({
+                orderId: "order-{{ order.id }}",
+                orderName: "{{ order }}",
+                successUrl: window.location.origin + "/ko/shop/success",
+                failUrl: window.location.origin + "/ko/shop/fail"
+            });
         });
+
     </script>
-{% endblock javascript %}
+{% endblock %}

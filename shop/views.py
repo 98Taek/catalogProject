@@ -13,6 +13,7 @@ def add_cart(request):
     product = get_object_or_404(Product, id=product_id)
     cart = request.session.get('cart', {})
     cart[str(product_id)] = {
+        'product_id': str(product_id),
         'quantity': 1,
         'price': str(product.price),
     }
@@ -71,6 +72,8 @@ def order_create(request):
         if form.is_valid():
             order = form.save()
             for item in cart.values():
+                product = cart[item['product_id']]['product']
+                item['price'] = Decimal(product.price)
                 OrderItem.objects.create(order=order, product=item['product'], price=item['price'],
                                          quantity=item['quantity'])
             request.session['cart'] = {}
@@ -84,8 +87,14 @@ def order_create(request):
 
 
 def payment_success(request):
-    return render(request, 'shop/success.html')
+    payment_key = request.GET.get('paymentKey')
+    order_id = request.GET.get('orderId')
+    res = dict(request.GET.items())
+    return render(request, 'shop/success.html', {'paymentKey': payment_key, 'orderId': order_id, 'res': res})
 
 
 def payment_fail(request):
-    return render(request, 'shop/fail.html')
+    code = request.GET.get('code')
+    message = request.GET.get('message')
+    res = dict(request.GET.items())
+    return render(request, 'shop/fail.html', {'code': code, 'message': message, 'res': res})

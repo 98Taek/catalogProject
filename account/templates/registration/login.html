@@ -11,6 +11,7 @@
         <p>
             {% trans "Your username and password didn't match." %}
             {% trans "Please try again." %}
+            <a href="{% url 'login' %}">{% trans "Login again." %}</a>
         </p>
     {% else %}
         <form action="" method="post">
