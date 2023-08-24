@@ -1,10 +1,11 @@
 {% extends 'blog/base.html' %}
+{% load i18n %}
 
-{% block title %}주문 완료{% endblock title %}
+{% block title %}{% trans "order_complete" %}{% endblock title %}
 
 {% block content %}
-    <h1>주문완료</h1>
+    <h1>{% trans "order_complete" %}</h1>
     <p>
-        #{{ order.id }} 주문이 완료되었습니다.
+        #{{ order.id }} {% trans "order completed." %}
     </p>
 {% endblock content %}

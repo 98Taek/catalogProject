@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-23 15:25+0900\n"
-"PO-Revision-Date: 2023-08-23 02:13+0000\n"
+"POT-Creation-Date: 2023-08-24 11:30+0900\n"
+"PO-Revision-Date: 2023-08-24 02:41+0000\n"
 "Last-Translator:   <imjt9345@naver.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -66,3 +66,12 @@ msgstr "order information"
 #: shop/templates/shop/new_order.html:27
 msgid "Total:"
 msgstr ""
+
+#: shop/templates/shop/order_created.html:4
+#: shop/templates/shop/order_created.html:7
+msgid "order_complete"
+msgstr "Order complete."
+
+#: shop/templates/shop/order_created.html:9
+msgid "order completed."
+msgstr "Order completed."

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-23 15:25+0900\n"
-"PO-Revision-Date: 2023-08-23 06:26+0000\n"
+"POT-Creation-Date: 2023-08-24 11:30+0900\n"
+"PO-Revision-Date: 2023-08-24 02:36+0000\n"
 "Last-Translator:   <imjt9345@naver.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -43,13 +43,53 @@ msgstr "상품"
 msgid "Add to Cart"
 msgstr "장바구니에 추가하기"
 
-#: mysite2/settings.py:122
+#: mysite2/settings.py:128
 msgid "English"
 msgstr "영어"
 
-#: mysite2/settings.py:123
+#: mysite2/settings.py:129
 msgid "Korean"
 msgstr "한국어"
+
+#: templates/base.html:10 templates/no_login.html:10
+msgid "base.html"
+msgstr "파이썬 6기"
+
+#: templates/base.html:17 templates/no_login.html:17
+msgid "title_nav"
+msgstr "메뉴"
+
+#: templates/base.html:21
+msgid "link_logout"
+msgstr "로그아웃"
+
+#: templates/base.html:22
+msgid "link_password_change"
+msgstr "비밀번호 변경"
+
+#: templates/base.html:24
+msgid "link_login"
+msgstr "로그인"
+
+#: templates/base.html:25
+msgid "link_register"
+msgstr "회원가입"
+
+#: templates/base.html:63
+msgid "title_sidebar"
+msgstr "목록"
+
+#: templates/base.html:65
+msgid "btn_cart"
+msgstr "장바구니"
+
+#: templates/base.html:69
+msgid "title_most_commented_post"
+msgstr "추천이 많은 게시물"
+
+#: templates/base.html:78
+msgid "title_latest_posts"
+msgstr "최근 게시물"
 
 #: venv/lib/python3.9/site-packages/click/_termui_impl.py:518
 #, python-brace-format

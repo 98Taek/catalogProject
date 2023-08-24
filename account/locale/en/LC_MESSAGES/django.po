@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-23 15:25+0900\n"
-"PO-Revision-Date: 2023-08-23 06:27+0000\n"
+"POT-Creation-Date: 2023-08-24 11:30+0900\n"
+"PO-Revision-Date: 2023-08-24 02:40+0000\n"
 "Last-Translator:   <imjt9345@naver.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -20,12 +20,7 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.9.9\n"
 
 #: account/templates/registration/logged_out.html:4
-#: account/templates/registration/logged_out.html:8
 msgid "Logout"
-msgstr "Logout"
-
-#: account/templates/registration/logged_out.html:9
-msgid "logout"
 msgstr "Logout"
 
 #: account/templates/registration/login.html:5
@@ -33,6 +28,61 @@ msgstr "Logout"
 msgid "Login"
 msgstr "Login"
 
+#: account/templates/registration/login.html:12
+msgid "Your username and password didn't match."
+msgstr ""
+
 #: account/templates/registration/login.html:13
+msgid "Please try again."
+msgstr ""
+
+#: account/templates/registration/login.html:19
 msgid "login"
 msgstr "Login"
+
+#: account/templates/registration/login.html:23
+msgid "You don't have account"
+msgstr ""
+
+#: account/templates/registration/login.html:23
+msgid "register here."
+msgstr ""
+
+#: account/templates/registration/login.html:28
+#: account/templates/registration/password_reset_form.html:9
+msgid "Forgotten your password?"
+msgstr ""
+
+#: account/templates/registration/password_reset_form.html:5
+msgid "title_password_reset"
+msgstr "Password Reset"
+
+#: account/templates/registration/password_reset_form.html:10
+msgid "Enter your e-mail address to obtain a new password."
+msgstr ""
+
+#: account/templates/registration/password_reset_form.html:13
+msgid "Send e-mail"
+msgstr ""
+
+#: account/templates/registration/register.html:6
+#: account/templates/registration/register.html:10
+msgid "title_register"
+msgstr "Register"
+
+#: account/templates/registration/register.html:14
+msgid "btn_register"
+msgstr "Register"
+
+#: account/templates/registration/register.html:17
+msgid "If you have account"
+msgstr ""
+
+#: account/templates/registration/register.html:17
+#, fuzzy
+#| msgid "login"
+msgid "login here."
+msgstr "Login"
+
+#~ msgid "logout"
+#~ msgstr "Logout"

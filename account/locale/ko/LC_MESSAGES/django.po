@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-23 15:25+0900\n"
-"PO-Revision-Date: 2023-08-23 06:26+0000\n"
+"POT-Creation-Date: 2023-08-24 11:30+0900\n"
+"PO-Revision-Date: 2023-08-24 02:39+0000\n"
 "Last-Translator:   <imjt9345@naver.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -20,12 +20,7 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.9.9\n"
 
 #: account/templates/registration/logged_out.html:4
-#: account/templates/registration/logged_out.html:8
 msgid "Logout"
-msgstr "로그아웃"
-
-#: account/templates/registration/logged_out.html:9
-msgid "logout"
 msgstr "로그아웃"
 
 #: account/templates/registration/login.html:5
@@ -33,6 +28,61 @@ msgstr "로그아웃"
 msgid "Login"
 msgstr "로그인"
 
+#: account/templates/registration/login.html:12
+msgid "Your username and password didn't match."
+msgstr "아이디와 비밀번호가 맞지 않습니다."
+
 #: account/templates/registration/login.html:13
+msgid "Please try again."
+msgstr "다시 시도해 주세요."
+
+#: account/templates/registration/login.html:19
 msgid "login"
 msgstr "로그인"
+
+#: account/templates/registration/login.html:23
+msgid "You don't have account"
+msgstr "계정이 없습니다."
+
+#: account/templates/registration/login.html:23
+msgid "register here."
+msgstr "회원가입 하세요."
+
+#: account/templates/registration/login.html:28
+#: account/templates/registration/password_reset_form.html:9
+msgid "Forgotten your password?"
+msgstr "비밀번호를 잊어버렸나요?"
+
+#: account/templates/registration/password_reset_form.html:5
+msgid "title_password_reset"
+msgstr "비밀번호 초기화"
+
+#: account/templates/registration/password_reset_form.html:10
+msgid "Enter your e-mail address to obtain a new password."
+msgstr "이메일을 입력해 새로운 비밀번호를 얻으세요."
+
+#: account/templates/registration/password_reset_form.html:13
+msgid "Send e-mail"
+msgstr "이메일 보내기"
+
+#: account/templates/registration/register.html:6
+#: account/templates/registration/register.html:10
+msgid "title_register"
+msgstr "회원가입"
+
+#: account/templates/registration/register.html:14
+msgid "btn_register"
+msgstr "회원가입"
+
+#: account/templates/registration/register.html:17
+msgid "If you have account"
+msgstr "만약 계정이 있다면"
+
+#: account/templates/registration/register.html:17
+#, fuzzy
+#| msgid "login"
+msgid "login here."
+msgstr "로그인"
+
+#~ msgid "logout"
+#~ msgstr "로그아웃"
