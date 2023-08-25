@@ -1,8 +1,8 @@
 import base64
 
 from celery import shared_task
-from celery.worker.state import requests
-from django.conf import settings
+import requests
+from mysite2 import settings
 from django.core.mail import send_mail
 from django.utils.crypto import get_random_string
 
@@ -23,18 +23,17 @@ def order_created(order_id):
 
 @shared_task
 def toss_payment_confirm(payment_key, toss_order_id):
-    order = Order.objects.get(id=toss_order_id)
-
-    # 토스 인증 - 시크릿 키를 base64 로 인코딩해서 헤더로 전달
+    order = Order.objects.get(toss_order_id=toss_order_id)
+    # 토스 인증 - 시크릿 키를 base64 로 인코딩해서 헤더로 전달함
     encoding_str = (settings.TOSS_SECRET_KEY + ':').encode()
     encoded_secret_key = base64.urlsafe_b64encode(encoding_str)
     # 결제 승인 API 호출
     toss_api_confirm_url = 'https://api.tosspayments.com/v1/payments/confirm'
     idempotency_key = get_random_string(length=100)
     confirm_headers = {
-        'Authorization': 'Basic' + encoded_secret_key.decode('utf-8'),
+        'Authorization': 'Basic ' + encoded_secret_key.decode('utf-8'),
         'Content-Type': 'application/json',
-        'Idempotency_key': idempotency_key,
+        'Idempotency-Key': idempotency_key,
     }
     payload = {
         'paymentKey': payment_key,
@@ -44,13 +43,11 @@ def toss_payment_confirm(payment_key, toss_order_id):
     confirm_res = requests.post(toss_api_confirm_url, json=payload, headers=confirm_headers)
     res_data = dict(confirm_res.json())
     print(res_data)
-
     # 결제 확인 API 호출
     toss_api_url = 'https://api.tosspayments.com/v1/payments/' + payment_key
     headers = {
-        'Authorization': 'Basic' + encoded_secret_key.decode('utf-8')
+        'Authorization': 'Basic ' + encoded_secret_key.decode('utf-8')
     }
-
     # 결과 확인 데이터베이스 업데이트
     response = requests.get(toss_api_url, headers=headers)
     res_data = dict(response.json())
@@ -60,4 +57,5 @@ def toss_payment_confirm(payment_key, toss_order_id):
         order.save()
     else:
         print('status:' + res_data['status'])
+    # print(dict(response.json()))
     return

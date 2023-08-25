@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from shop import webhooks
+
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
@@ -30,5 +32,6 @@ urlpatterns = i18n_patterns(
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
+    path('webhook/toss/', webhooks.toss_webhook, name='toss-webhook'),
     path('social-auth/', include('social_django.urls', namespace='social')),
 ]

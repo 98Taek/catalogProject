@@ -1,40 +1,30 @@
-from _decimal import Decimal
+from decimal import Decimal
+
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 
 from mysite2 import settings
-from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
-
 from shop.forms import OrderCreateForm
 from shop.models import Product, OrderItem, Order
 from shop.tasks import order_created, toss_payment_confirm
 
 
+# Create your views here.
 def add_cart(request):
     product_id = request.POST.get('id')
     product = get_object_or_404(Product, id=product_id)
+    # 세션 'cart' 정보 가져오기
     cart = request.session.get('cart', {})
     cart[str(product_id)] = {
         'product_id': str(product_id),
         'quantity': 1,
         'price': str(product.price),
     }
+    # cart 변수를 세션에 저장
     request.session['cart'] = cart
     request.session.modified = True
+
     return JsonResponse({'cart_length': len(cart.items())})
-
-
-def cart_detail(request):
-    cart = request.session.get('cart', {})
-    product_ids = cart.keys()
-    products = Product.objects.filter(id__in=product_ids)
-    for product in products:
-        cart[str(product.id)]['product'] = product
-    for key, item in cart.items():
-        item['price'] = Decimal(item['price'])
-        item['total_price'] = item['price'] * item['quantity']
-        cart[key] = item
-    total_price = sum(Decimal(item['price']) * item['quantity'] for item in cart.values())
-    return render(request, 'shop/cart.html', {'cart_dict': cart, 'total_price': total_price})
 
 
 def cart_remove(request, product_id):
@@ -53,24 +43,49 @@ def cart_update(request, product_id):
     return redirect('shop:cart_detail')
 
 
-def payment_test(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    toss_client_key = settings.TOSS_CLIENT_KEY
-    return render(request, 'shop/payment.html', {'order': order, 'toss_client_key': toss_client_key})
-
-
-def order_create(request):
+def cart_detail(request):
     cart = request.session.get('cart', {})
     product_ids = cart.keys()
     products = Product.objects.filter(id__in=product_ids)
     for product in products:
         cart[str(product.id)]['product'] = product
     for key, item in cart.items():
-        item['price'] = Decimal(item['price'])
+        product = cart[item['product_id']]['product']
+        item['price'] = Decimal(product.price)
         item['total_price'] = item['price'] * item['quantity']
         cart[key] = item
     total_price = sum(Decimal(item['price']) * item['quantity'] for item in cart.values())
 
+    return render(request, 'shop/cart.html', {
+        'cart_dict': cart,
+        'total_price': total_price
+    })
+
+
+# 결제 확인을 위한 임시 페이지
+def payment_test(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    toss_client_key = settings.TOSS_CLIENT_KEY
+    return render(request, 'shop/payment.html', {
+        'order': order,
+        'toss_client_key': toss_client_key})
+
+
+def order_create(request):
+    cart = request.session.get('cart', {})
+
+    product_ids = cart.keys()
+    products = Product.objects.filter(id__in=product_ids)
+    for product in products:
+        cart[str(product.id)]['product'] = product
+    for key, item in cart.items():
+        product = cart[item['product_id']]['product']
+        item['price'] = Decimal(product.price)
+        item['total_price'] = item['price'] * item['quantity']
+        cart[key] = item
+    total_price = sum(Decimal(item['price']) * item['quantity'] for item in cart.values())
+
+    # 세션 장바구니가 비어있는 경우 홈으로 이동
     if len(cart.keys()) == 0:
         return redirect('blog:post_list')
 
@@ -81,29 +96,47 @@ def order_create(request):
             for item in cart.values():
                 product = cart[item['product_id']]['product']
                 item['price'] = Decimal(product.price)
-                OrderItem.objects.create(order=order, product=item['product'], price=item['price'],
+                OrderItem.objects.create(order=order,
+                                         product=item['product'],
+                                         price=item['price'],
                                          quantity=item['quantity'])
             request.session['cart'] = {}
             request.session.modified = True
             order_created.delay(order.id)
             toss_client_key = settings.TOSS_CLIENT_KEY
-            return render(request, 'shop/payment.html', {'order': order, 'toss_client_key': toss_client_key})
+            return render(request, 'shop/payment.html', {
+                'order': order,
+                'toss_client_key': toss_client_key})
     else:
         form = OrderCreateForm()
 
-    return render(request, 'shop/new_order.html', {'form': form, 'cart_dict': cart, 'total_price': total_price})
+    return render(request,
+                  'shop/new_order.html',
+                  {
+                      'form': form,
+                      'cart_dict': cart,
+                      'total_price': total_price
+                  })
 
 
 def payment_success(request):
     payment_key = request.GET.get('paymentKey')
-    order_id = request.GET.get('orderId')
+    toss_order_id = request.GET.get('orderId')
     res = dict(request.GET.items())
-    toss_payment_confirm.delay(payment_key, order_id)
-    return render(request, 'shop/success.html', {'paymentKey': payment_key, 'orderId': order_id, 'res': res})
+    toss_payment_confirm.delay(payment_key, toss_order_id)
+    return render(request, 'shop/success.html', {
+        'paymentKey': payment_key,
+        'orderId': toss_order_id,
+        'res': res,
+    })
 
 
 def payment_fail(request):
     code = request.GET.get('code')
     message = request.GET.get('message')
     res = dict(request.GET.items())
-    return render(request, 'shop/fail.html', {'code': code, 'message': message, 'res': res})
+    return render(request, 'shop/fail.html', {
+        'code': code,
+        'message': message,
+        'res': res,
+    })

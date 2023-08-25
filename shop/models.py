@@ -1,7 +1,5 @@
-import random
-import string
-
 from django.db import models
+from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 from parler.models import TranslatableModel, TranslatedFields
 
@@ -31,10 +29,6 @@ class Product(TranslatableModel):
         return self.name
 
 
-def generate_random_text():
-    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(50))
-
-
 class Order(models.Model):
     name = models.CharField(_('name'), max_length=50)
     email = models.EmailField(_('email'))
@@ -43,7 +37,7 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    toss_order_id = models.CharField(max_length=50, unique=True, null=True, default=generate_random_text())
+    toss_order_id = models.CharField(max_length=50, unique=True, null=True, default=get_random_string(50))
 
     def __str__(self):
         return f'주문 {self.id}'
