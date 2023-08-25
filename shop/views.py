@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
 from shop.forms import OrderCreateForm
-from shop.models import Product, OrderItem
+from shop.models import Product, OrderItem, Order
 from shop.tasks import order_created
 
 
@@ -50,6 +50,11 @@ def cart_update(request, product_id):
     request.session['cart'] = cart
     request.session.modified = True
     return redirect('shop:cart_detail')
+
+
+def payment_test(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'shop/payment.html', {'order': order})
 
 
 def order_create(request):
