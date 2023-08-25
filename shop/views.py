@@ -1,5 +1,6 @@
 from _decimal import Decimal
 
+from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -84,7 +85,8 @@ def order_create(request):
             request.session['cart'] = {}
             request.session.modified = True
             order_created.delay(order.id)
-            return render(request, 'shop/payment.html', {'order': order})
+            toss_client_key = settings.TOSS_CLIENT_KEY
+            return render(request, 'shop/payment.html', {'order': order, 'toss_client_key': toss_client_key})
     else:
         form = OrderCreateForm()
 
