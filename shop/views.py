@@ -1,6 +1,6 @@
 from _decimal import Decimal
 
-from django.conf import settings
+from mysite2 import settings
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -55,7 +55,8 @@ def cart_update(request, product_id):
 
 def payment_test(request, order_id):
     order = get_object_or_404(Order, id=order_id)
-    return render(request, 'shop/payment.html', {'order': order})
+    toss_client_key = settings.TOSS_CLIENT_KEY
+    return render(request, 'shop/payment.html', {'order': order, 'toss_client_key': toss_client_key})
 
 
 def order_create(request):
